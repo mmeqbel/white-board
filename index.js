@@ -16,10 +16,14 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
   });
   let drawing=false;
-  socket.on("mousedown",(x,y)=>{
+  let strokeStyle="black";
+  let lineWidth=10;
+  socket.on("mousedown",(x,y,_strokeStyle,_lineWidth)=>{
     console.log("mouse down");
     drawing=true;
-    io.emit("_mousedown",drawing,x,y);
+    strokeStyle=_strokeStyle;
+    lineWidth=_lineWidth;
+    io.emit("_mousedown",drawing,x,y,strokeStyle,lineWidth);
   });
   socket.on("mouseup",()=>{
     console.log("mouse up");
